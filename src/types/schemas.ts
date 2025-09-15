@@ -27,4 +27,14 @@ export type Lampahan = {
     full_cerita: string;
     catatan_budaya?: string[];
   };
+  modern?: {
+    sinopsis?: string;
+    tldr?: string;
+    keyEvents?: string[]; // normalized strings
+    wiki?: {
+      characters?: { name: string; role?: string; description?: string }[];
+      objects?: { name: string; description?: string }[];
+      funFacts?: string[];
+    };
+  };
 };

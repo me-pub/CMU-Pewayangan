@@ -1,19 +1,23 @@
 import { Tabs } from 'expo-router';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
+import { LayoutAnimation, Platform } from 'react-native';
 import { useAppStore } from '../../src/state/store';
 import { getTheme } from '../../src/lib/theme';
-import { Platform } from 'react-native';
 
 export default function TabLayout() {
   const mode = useAppStore((s) => s.mode);
   const t = getTheme(mode);
 
+  useEffect(() => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+  }, [mode]);
+
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: t.tabBarActive,
+        tabBarActiveTintColor: t.accent,
         tabBarInactiveTintColor: t.tabBarInactive,
         tabBarLabelStyle: { fontSize: 12, fontWeight: '600' },
         tabBarStyle: {
@@ -45,24 +49,10 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="search"
+        name="wiki"
         options={{
-          title: 'Search',
-          tabBarIcon: ({ color, size }) => <Ionicons name="search" color={color} size={size} />,
-        }}
-      />
-      <Tabs.Screen
-        name="library"
-        options={{
-          title: 'Library',
-          tabBarIcon: ({ color, size }) => <Ionicons name="bookmark" color={color} size={size} />,
-        }}
-      />
-      <Tabs.Screen
-        name="settings"
-        options={{
-          title: 'Settings',
-          tabBarIcon: ({ color, size }) => <Ionicons name="settings" color={color} size={size} />,
+          title: 'Wiki',
+          tabBarIcon: ({ color, size }) => <Ionicons name="book" color={color} size={size} />,
         }}
       />
     </Tabs>
