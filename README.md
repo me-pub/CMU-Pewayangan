@@ -1,50 +1,63 @@
-# Welcome to your Expo app 👋
+# Catch Me Up Wayang
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Catch Me Up Wayang is an offline-first Expo mobile app that reintroduces classic wayang lampahan (plays) to Gen Z readers. Every story ships with two reading modes: Authentic for cultural purists and Modern for quick, bingeable catch-ups, so users can explore wayang lore without needing an internet connection or an account.
 
-## Get started
+## Highlights
+- **100% offline experience:** Stories, images, and metadata are bundled as local JSON so the app works on low-end Android devices and in poor connectivity.
+- **Dual reading modes:** Toggle between Authentic (Sinopsis, Full Cerita, Catatan Budaya) and Modern (Sinopsis, TL;DR, Key Events timeline, Wiki-style entities) perspectives for each lampahan.
+- **Search and discovery:** Fuse.js-powered search plus curated Popular and Recent lists help readers dive into characters, locations, and key events fast.
+- **Thoughtful design:** Light/dark-ready design tokens, accessible typography, and gentle micro-interactions keep the experience inviting.
 
+## Tech Stack
+- Expo + React Native (TypeScript) with `expo-router`
+- Zustand for lightweight state (mode, saved items)
+- AsyncStorage cache on top of bundled JSON content
+- Zod for content validation, Fuse.js for fuzzy search
+- Jest + Testing Library (unit) and Detox (smoke) planned for coverage
+
+## Project Structure
+The app uses Expo Router's file-based navigation. Key folders:
+
+```
+app/                # Screens and navigation layouts
+assets/             # Images, splash assets, bundled JSON (e.g., lakon_data.json)
+src/components/     # Reusable UI components (cards, timelines, wiki sheets)
+src/features/       # Feature-level logic (detail, search, library)
+src/lib/            # Utilities (fuse index, storage helpers, theming)
+src/state/          # Zustand stores for UI preferences and saved items
+```
+
+Refer to `docs/CatchMeUpWayang_Project_Breakdown.md` for the full product vision, milestones, and acceptance criteria.
+
+## Getting Started
 1. Install dependencies
-
    ```bash
    npm install
    ```
-
-2. Start the app
-
+2. Run the development server
    ```bash
    npx expo start
    ```
+3. Choose your target:
+   - Development build
+   - Android emulator
+   - iOS simulator
+   - Expo Go (quick preview)
 
-In the output, you'll find options to open the app in a
+## Content Pipeline
+- All lampahan live in `assets/lakon_data.json` (v1).
+- Data is validated on load with Zod and cached locally for fast reopens.
+- Key events, wiki entities, and tags fuel mode-specific layouts and search filters.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Roadmap Snapshot
+- **M0 Foundations:** Expo setup, design tokens, JSON validation, smoke tests.
+- **M1 Authentic MVP:** Home feeds, search, detailed Authentic reading flow.
+- **M2 Modern Mode:** TL;DR timelines, wiki cards, saved stories.
+- **M3 Polish & A11y:** Collections, filters, performance tuning, accessibility passes.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Contributing
+1. Follow the roadmap in `docs/` before opening large pull requests.
+2. Keep additions offline-ready; bundle assets and update JSON schemas/tests.
+3. Run linting and tests before submitting changes.
 
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Ready to help someone discover their next favorite wayang story? Run the app and start exploring.
